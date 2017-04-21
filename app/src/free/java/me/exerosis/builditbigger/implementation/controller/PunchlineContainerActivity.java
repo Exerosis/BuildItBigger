@@ -13,6 +13,7 @@ import me.exerosis.builditbigger.implementation.view.container.PunchlineContaine
 import me.exerosis.builditbigger.mvc.Container;
 
 public class PunchlineContainerActivity extends AppCompatActivity implements PunchlineContainerController {
+    public static final String ARGS_PUNCHLINE = "PUNCHLINE";
     private static final String TAG_PUNCHLINE_FRAGMENT = "PUNCHLINE_FRAGMENT";
     private static final String AD_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
     private InterstitialAd interstitialAd;
