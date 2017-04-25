@@ -15,7 +15,7 @@ import me.exerosis.builditbigger.mvc.Container;
 public class PunchlineContainerActivity extends AppCompatActivity implements PunchlineContainerController {
     public static final String ARGS_PUNCHLINE = "PUNCHLINE";
     private static final String TAG_PUNCHLINE_FRAGMENT = "PUNCHLINE_FRAGMENT";
-    private static final String AD_INTERSTITIAL = "ca-app-pub-3940256099942544/1033173712";
+    private static final String PUNCHLINE_INTERSTITIAL = "ca-app-pub-5347337988962999/7653891268";
     private InterstitialAd interstitialAd;
     private Container view;
 
@@ -26,7 +26,7 @@ public class PunchlineContainerActivity extends AppCompatActivity implements Pun
         setContentView(view.getRoot());
 
         interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(AD_INTERSTITIAL);
+        interstitialAd.setAdUnitId(PUNCHLINE_INTERSTITIAL);
         interstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {

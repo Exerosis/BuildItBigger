@@ -1,4 +1,4 @@
-package me.exerosis.builditbigger.implementation.controller;
+package me.exerosis.builditbigger.implementation.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,20 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.github.yasevich.endlessrecyclerview.EndlessRecyclerView;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import me.exerosis.builditbigger.R;
+import me.exerosis.builditbigger.implementation.controller.JokesList;
 import me.exerosis.builditbigger.implementation.controller.adapters.JokesListAdapter;
 
 public class JokesListView implements JokesList {
     private final View view;
-    private final AdView bannerAd;
     private final EndlessRecyclerView jokesList;
 
     public JokesListView(LayoutInflater inflater, ViewGroup container) {
         view = inflater.inflate(R.layout.jokes_list_view, container, false);
-        bannerAd = (AdView) view.findViewById(R.id.jokes_list_banner_ad);
         jokesList = (EndlessRecyclerView) view.findViewById(R.id.jokes_list);
 
         jokesList.setProgressView(new ProgressBar(view.getContext()));
@@ -37,11 +34,6 @@ public class JokesListView implements JokesList {
     public void setAdapter(@NonNull JokesListAdapter adapter) {
         jokesList.setAdapter(adapter);
         jokesList.setPager(adapter);
-    }
-
-    @Override
-    public void loadAd(AdRequest request) {
-        bannerAd.loadAd(request);
     }
 
     @Override
