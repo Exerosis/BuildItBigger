@@ -14,16 +14,16 @@ import me.exerosis.builditbigger.jokes.Joke;
 import me.exerosis.builditbigger.jokes.JokeGenerator;
 import me.exerosis.builditbigger.mvc.Listenable;
 
-public class JokesListAdapter extends RecyclerView.Adapter<JokeHolderView> implements EndlessRecyclerView.Pager, Listenable<JokeListAdapterListener> {
-    private static JokesListAdapter instance = new JokesListAdapter();
+public class JokeListAdapter extends RecyclerView.Adapter<JokeHolderView> implements EndlessRecyclerView.Pager, Listenable<JokeListAdapterListener> {
+    private static JokeListAdapter instance = new JokeListAdapter();
     private final List<Joke> jokes = new ArrayList<>();
     private JokeListAdapterListener listener;
 
-    public static JokesListAdapter getInstance() {
+    public static JokeListAdapter getInstance() {
         return instance;
     }
 
-    private JokesListAdapter() {
+    private JokeListAdapter() {
     }
 
     @Override

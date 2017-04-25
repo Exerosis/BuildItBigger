@@ -4,12 +4,12 @@
     android:layout_height="match_parent">
 
     <com.github.yasevich.endlessrecyclerview.EndlessRecyclerView
-        android:id="@+id/jokes_list"
+        android:id="@+id/joke_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <com.google.android.gms.ads.AdView
-        android:id="@+id/jokes_list_banner_ad"
+        android:id="@+id/joke_list_banner_ad"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

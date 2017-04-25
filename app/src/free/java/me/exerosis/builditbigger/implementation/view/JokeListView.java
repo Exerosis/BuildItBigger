@@ -12,18 +12,18 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import me.exerosis.builditbigger.R;
-import me.exerosis.builditbigger.implementation.controller.JokesList;
-import me.exerosis.builditbigger.implementation.controller.adapters.JokesListAdapter;
+import me.exerosis.builditbigger.implementation.controller.JokeList;
+import me.exerosis.builditbigger.implementation.controller.adapters.JokeListAdapter;
 
-public class JokesListView implements JokesList {
+public class JokeListView implements JokeList {
     private final View view;
     private final AdView bannerAd;
     private final EndlessRecyclerView jokesList;
 
-    public JokesListView(LayoutInflater inflater, ViewGroup container) {
+    public JokeListView(LayoutInflater inflater, ViewGroup container) {
         view = inflater.inflate(R.layout.jokes_list_view, container, false);
-        bannerAd = (AdView) view.findViewById(R.id.jokes_list_banner_ad);
-        jokesList = (EndlessRecyclerView) view.findViewById(R.id.jokes_list);
+        bannerAd = (AdView) view.findViewById(R.id.joke_list_banner_ad);
+        jokesList = (EndlessRecyclerView) view.findViewById(R.id.joke_list);
 
         jokesList.setProgressView(new ProgressBar(view.getContext()));
     }
@@ -37,12 +37,12 @@ public class JokesListView implements JokesList {
     }
 
     @Override
-    public JokesListAdapter getAdapter() {
-        return (JokesListAdapter) jokesList.getAdapter();
+    public JokeListAdapter getAdapter() {
+        return (JokeListAdapter) jokesList.getAdapter();
     }
 
     @Override
-    public void setAdapter(@NonNull JokesListAdapter adapter) {
+    public void setAdapter(@NonNull JokeListAdapter adapter) {
         jokesList.setAdapter(adapter);
         jokesList.setPager(adapter);
     }
