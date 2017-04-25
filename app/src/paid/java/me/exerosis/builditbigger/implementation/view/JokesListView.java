@@ -10,10 +10,10 @@ import android.widget.ProgressBar;
 import com.github.yasevich.endlessrecyclerview.EndlessRecyclerView;
 
 import me.exerosis.builditbigger.R;
-import me.exerosis.builditbigger.implementation.controller.JokesList;
-import me.exerosis.builditbigger.implementation.controller.adapters.JokesListAdapter;
+import me.exerosis.builditbigger.implementation.controller.JokeList;
+import me.exerosis.builditbigger.implementation.controller.adapters.JokeListAdapter;
 
-public class JokesListView implements JokesList {
+public class JokesListView implements JokeList {
     private final View view;
     private final EndlessRecyclerView jokesList;
 
@@ -26,12 +26,12 @@ public class JokesListView implements JokesList {
 
 
     @Override
-    public JokesListAdapter getAdapter() {
-        return (JokesListAdapter) jokesList.getAdapter();
+    public JokeListAdapter getAdapter() {
+        return (JokeListAdapter) jokesList.getAdapter();
     }
 
     @Override
-    public void setAdapter(@NonNull JokesListAdapter adapter) {
+    public void setAdapter(@NonNull JokeListAdapter adapter) {
         jokesList.setAdapter(adapter);
         jokesList.setPager(adapter);
     }

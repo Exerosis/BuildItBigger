@@ -16,6 +16,7 @@ public class PunchlineContainerActivity extends AppCompatActivity implements Pun
         super.onCreate(in);
         view = new PunchlineContainerView(getLayoutInflater());
         setContentView(view.getRoot());
-        getSupportFragmentManager().beginTransaction().replace(view.getContainerID(), new PunchlineFragment(), TAG_PUNCHLINE_FRAGMENT).commit();
+        getSupportFragmentManager().beginTransaction().replace(view.getContainerID(),
+                PunchlineFragment.newInstance(getIntent().getExtras()), TAG_PUNCHLINE_FRAGMENT).commit();
     }
 }

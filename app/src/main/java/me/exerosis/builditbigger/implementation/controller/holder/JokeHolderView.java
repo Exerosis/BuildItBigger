@@ -12,7 +12,7 @@ import me.exerosis.builditbigger.R;
 import me.exerosis.builditbigger.implementation.controller.PunchlineContainerActivity;
 import me.exerosis.builditbigger.jokes.Joke;
 
-import static me.exerosis.builditbigger.implementation.controller.PunchlineContainerActivity.ARGS_PUNCHLINE;
+import static me.exerosis.builditbigger.implementation.controller.PunchlineFragment.ARGS_PUNCHLINE;
 
 public class JokeHolderView extends RecyclerView.ViewHolder implements JokeHolder {
     private Joke joke;

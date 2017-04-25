@@ -34,9 +34,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(path: ':punchline')
+    compile project(path: ':jokes')
     compile 'com.github.yasevich:endless-recycler-view:1.1.0'
     compile 'com.android.support:appcompat-v7:25.0.3'
     freeCompile 'com.google.android.gms:play-services-ads:10.2.1'
     testCompile 'junit:junit:4.12'
-    compile project(path: ':jokes')
 }
