@@ -8,15 +8,16 @@ import android.view.ViewGroup;
 
 import me.exerosis.builditbigger.implementation.controller.adapters.JokeListAdapter;
 import me.exerosis.builditbigger.implementation.controller.adapters.JokeListAdapterListener;
-import me.exerosis.builditbigger.implementation.view.JokesListView;
+import me.exerosis.builditbigger.implementation.view.JokeListView;
 
 public class JokeListFragment extends Fragment implements JokeListController, JokeListAdapterListener {
-    private JokesListView view;
+    private JokeListView view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = new JokesListView(inflater, container);
+        view = new JokeListView(inflater, container);
         JokeListAdapter adapter = JokeListAdapter.getInstance();
+        adapter.setListener(this);
         view.setAdapter(adapter);
         return view.getRoot();
     }

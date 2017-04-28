@@ -15,6 +15,7 @@ import me.exerosis.builditbigger.jokes.JokeGenerator;
 import me.exerosis.builditbigger.mvc.Listenable;
 
 public class JokeListAdapter extends RecyclerView.Adapter<JokeHolderView> implements EndlessRecyclerView.Pager, Listenable<JokeListAdapterListener> {
+    public static final int INITIAL_COUNT = 5;
     private static JokeListAdapter instance = new JokeListAdapter();
     private final List<Joke> jokes = new ArrayList<>();
     private JokeListAdapterListener listener;
@@ -24,6 +25,8 @@ public class JokeListAdapter extends RecyclerView.Adapter<JokeHolderView> implem
     }
 
     private JokeListAdapter() {
+        for (int i = 0; i < INITIAL_COUNT; i++)
+            loadNextPage();
     }
 
     @Override
@@ -50,6 +53,8 @@ public class JokeListAdapter extends RecyclerView.Adapter<JokeHolderView> implem
     @Override
     public void loadNextPage() {
         jokes.add(JokeGenerator.generateJoke());
+        if (listener != null)
+            listener.onLoaded();
     }
 
     @Override

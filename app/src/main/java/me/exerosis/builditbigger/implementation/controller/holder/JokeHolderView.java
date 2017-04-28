@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import me.exerosis.builditbigger.R;
 import me.exerosis.builditbigger.implementation.controller.PunchlineContainerActivity;
@@ -15,10 +16,13 @@ import me.exerosis.builditbigger.jokes.Joke;
 import static me.exerosis.builditbigger.implementation.controller.PunchlineFragment.ARGS_PUNCHLINE;
 
 public class JokeHolderView extends RecyclerView.ViewHolder implements JokeHolder {
+    private final TextView punchline;
     private Joke joke;
 
     public JokeHolderView(LayoutInflater inflater, ViewGroup container) {
         super(inflater.inflate(R.layout.joke_holder_view, container, false));
+
+        punchline = (TextView) itemView.findViewById(R.id.joke_holder_punchline);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,5 +49,6 @@ public class JokeHolderView extends RecyclerView.ViewHolder implements JokeHolde
     @Override
     public void setJoke(Joke joke) {
         this.joke = joke;
+        punchline.setText(joke.getSetup());
     }
 }

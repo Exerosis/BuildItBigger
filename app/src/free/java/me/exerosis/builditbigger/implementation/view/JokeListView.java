@@ -2,6 +2,7 @@ package me.exerosis.builditbigger.implementation.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,15 +26,12 @@ public class JokeListView implements JokeList {
         bannerAd = (AdView) view.findViewById(R.id.joke_list_banner_ad);
         jokesList = (EndlessRecyclerView) view.findViewById(R.id.joke_list);
 
+        jokesList.setLayoutManager(new LinearLayoutManager(view.getContext()));
         jokesList.setProgressView(new ProgressBar(view.getContext()));
     }
 
     public void loadAd(AdRequest request) {
         bannerAd.loadAd(request);
-    }
-
-    public void setAdUnitId(String id) {
-        bannerAd.setAdUnitId(id);
     }
 
     @Override

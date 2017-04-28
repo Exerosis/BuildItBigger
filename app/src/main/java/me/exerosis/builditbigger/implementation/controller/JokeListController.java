@@ -1,4 +1,6 @@
 package me.exerosis.builditbigger.implementation.controller;
 
-public interface JokeListController {
+import me.exerosis.builditbigger.implementation.controller.adapters.JokeListAdapterListener;
+
+public interface JokeListController extends JokeListAdapterListener {
 }
