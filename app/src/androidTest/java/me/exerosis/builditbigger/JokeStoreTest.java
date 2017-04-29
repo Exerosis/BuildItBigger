@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class JokeStoreTest {
     @Test
     public void useAppContext() throws Exception {
         Context context = InstrumentationRegistry.getTargetContext();
