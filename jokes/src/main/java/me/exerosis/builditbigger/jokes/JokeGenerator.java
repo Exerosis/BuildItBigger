@@ -9,7 +9,7 @@ public final class JokeGenerator {
 
 
     public static Joke generateJoke() {
-        return new Joke("Setup" + number++, "Punchline" + number);
+        return new Joke("Setup" + ++number, "Punchline" + number);
     }
 
 }
