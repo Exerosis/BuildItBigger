@@ -26,6 +26,9 @@ android {
 
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -35,8 +38,15 @@ dependencies {
     })
     compile project(path: ':punchline')
     compile project(path: ':jokes')
+    //noinspection GradleCompatible
+    compile 'com.android.support:appcompat-v7:25.3.1'
+
     compile 'com.github.yasevich:endless-recycler-view:1.1.0'
-    compile 'com.android.support:appcompat-v7:25.0.3'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'io.reactivex:rxjava:1.1.6'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+
     freeCompile 'com.google.android.gms:play-services-ads:10.2.1'
     testCompile 'junit:junit:4.12'
 }

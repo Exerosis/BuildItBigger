@@ -9,6 +9,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
 import me.exerosis.builditbigger.implementation.controller.container.PunchlineContainerController;
+import me.exerosis.builditbigger.implementation.view.Punchline;
+import me.exerosis.builditbigger.implementation.view.container.PunchlineContainer;
 import me.exerosis.builditbigger.implementation.view.container.PunchlineContainerView;
 import me.exerosis.builditbigger.mvc.Container;
 
@@ -17,7 +19,7 @@ public class PunchlineContainerActivity extends AppCompatActivity implements Pun
     private static final String TAG_PUNCHLINE_FRAGMENT = "PUNCHLINE_FRAGMENT";
     private static final String PUNCHLINE_INTERSTITIAL = "ca-app-pub-5347337988962999/7653891268";
     private InterstitialAd interstitialAd;
-    private Container view;
+    private PunchlineContainer view;
 
     @Override
     protected void onCreate(Bundle in) {
@@ -41,14 +43,10 @@ public class PunchlineContainerActivity extends AppCompatActivity implements Pun
 
             @Override
             public void onAdClosed() {
-                getSupportFragmentManager().beginTransaction().replace(view.getContainerID(), new PunchlineFragment(), TAG_PUNCHLINE_FRAGMENT).commit();
-                loadAd();
+                view.removeProgressBar();
+                getSupportFragmentManager().beginTransaction().replace(view.getContainerID(), PunchlineFragment.newInstance(getIntent().getExtras()), TAG_PUNCHLINE_FRAGMENT).commitAllowingStateLoss();
             }
         });
-        loadAd();
-    }
-
-    public void loadAd() {
         interstitialAd.loadAd(new AdRequest.Builder().setRequestAgent("android_studio:ad_template").build());
     }
 }

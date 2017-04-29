@@ -6,6 +6,8 @@ import android.view.View;
 
 import me.exerosis.builditbigger.punchline.R;
 
+import static android.view.View.*;
+
 
 public class PunchlineContainerView implements PunchlineContainer {
     private final View view;
@@ -27,5 +29,10 @@ public class PunchlineContainerView implements PunchlineContainer {
     @Override
     public Bundle getViewState() {
         return null;
+    }
+
+    @Override
+    public void removeProgressBar() {
+        view.findViewById(R.id.punchline_container_progress_bar).setVisibility(INVISIBLE);
     }
 }
