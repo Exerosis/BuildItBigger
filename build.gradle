@@ -22,11 +22,12 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-/*
-task completeTest (dependsOn: [":backend:appengineRun", ":backend:appengineStop", ":app:connectedCheck"]) {
-    project(":backend") {
-        appengine.daemon true;
-    }
+task completeTest(dependsOn: [":backend:appengineRun", ":app:connectedCheck"]) {
+/*    project(":backend") {
+        appengine {
+            daemon true;
+        }
+    }*/
 
     tasks.getByPath(":backend:appengineRun").mustRunAfter tasks.getByPath(":app:connectedCheck")
     finalizedBy tasks.getByPath(":backend:appengineStop")
@@ -34,4 +35,4 @@ task completeTest (dependsOn: [":backend:appengineRun", ":backend:appengineStop"
     doLast {
         println 'gceServerTest completed'
     }
-}*/
+}
