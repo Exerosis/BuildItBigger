@@ -12,6 +12,8 @@ import me.exerosis.builditbigger.jokes.JokeStore;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 import static org.junit.Assert.*;
 
@@ -25,7 +27,8 @@ public class JokeStoreTest {
         JokeStore jokeStore = new Retrofit.Builder().
                 addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
                 addConverterFactory(GsonConverterFactory.create()).
-                baseUrl("http://192.168.1.4:8080/_ah/api/").build().create(JokeStore.class);
+                baseUrl("http://10.60.12.117:8080/_ah/api/").build().create(JokeStore.class);
+
 
         Joke joke = jokeStore.getJoke().toBlocking().first();
         assertNotNull(joke);

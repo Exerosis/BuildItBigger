@@ -28,12 +28,12 @@ import rx.Observable;
                 packagePath = ""
         )
 )
-public class JokeEndpoint implements JokeStore {
+public class JokeEndpoint {
 
-    @Override
+//    @Override
     @ApiMethod(name = "getJoke")
-    @ApiTransformer(JokeTransformer.class)
-    public Observable getJoke() {
-        return JokeFactory.getInstance().getJoke();
+  //  @ApiTransformer(JokeTransformer.class)
+    public Joke getJoke() {
+        return JokeFactory.getInstance().getJoke().toBlocking().first();
     }
 }
