@@ -16,9 +16,10 @@ public class Servlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
+        String json = gson.toJson(JokeFactory.getInstance().getJoke().toBlocking().first());
+        response.setContentType("json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(gson.toJson(JokeFactory.getInstance().getJoke()));
+        response.getWriter().write(json);
         response.getWriter().flush();
     }
 }

@@ -16,20 +16,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
-public class JokeStoreTest {
+public class AppJokeStoreTest {
     @Test
-    public void useAppContext() throws Exception {
-        Context context = InstrumentationRegistry.getTargetContext();
-        assertEquals("me.exerosis.builditbigger", context.getPackageName());
-
-
+    public void retrofitReturnsJoke() throws Exception {
         JokeStore jokeStore = new Retrofit.Builder().
-                addC                addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
+                addConverterFactory(GsonConverterFactory.create()).
+                addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
                 baseUrl("http://10.60.12.125:8080/").build().create(JokeStore.class);
 
-
         Joke joke = jokeStore.getJoke().toBlocking().first();
-        System.out.println(joke);
         assertNotNull(joke);
         assertNotNull(joke.getSetup());
         assertNotNull(joke.getPunchline());
