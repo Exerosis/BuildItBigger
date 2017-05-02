@@ -48,5 +48,4 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     freeCompile 'com.google.android.gms:play-services-ads:10.2.1'
-    compile project(path: ':backend', configuration: 'android-endpoints')
 }

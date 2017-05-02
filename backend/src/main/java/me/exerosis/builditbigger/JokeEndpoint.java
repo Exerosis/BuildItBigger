@@ -28,6 +28,22 @@ import rx.Observable;
                 packagePath = ""
         )
 )
+//<servlet>
+//<servlet-name>SystemServiceServlet</servlet-name>
+//<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+//<init-param>
+//<param-name>services</param-name>
+//<param-value>me.exerosis.builditbigger.JokeEndpoint</param-value>
+//</init-param>
+//</servlet>
+//<servlet-mapping>
+//<servlet-name>SystemServiceServlet</servlet-name>
+//<url-pattern>/_ah/spi/*</url-pattern>
+//    </servlet-mapping>
+//
+//    <welcome-file-list>
+//        <welcome-file>index.html</welcome-file>
+//    </welcome-file-list>
 public class JokeEndpoint {
 
 //    @Override
