@@ -23,13 +23,9 @@ public class JokeStoreTest {
         assertEquals("me.exerosis.builditbigger", context.getPackageName());
 
 
-     //   new EndpointsAsyncTask().execute(context);
-
-
         JokeStore jokeStore = new Retrofit.Builder().
-                addConverterFactory(GsonConverterFactory.create()).
-                addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
-                baseUrl("http://10.60.12.125:8080/api/").build().create(JokeStore.class);
+                addC                addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
+                baseUrl("http://10.60.12.125:8080/").build().create(JokeStore.class);
 
 
         Joke joke = jokeStore.getJoke().toBlocking().first();
