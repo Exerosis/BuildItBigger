@@ -22,19 +22,13 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-
-task testWithBackend(dependsOn: [':backend:appengineRun', ':app:test']) {
+task testWithBackend() {
     evaluationDependsOn ':backend'
+
     project(':backend') {
         appengine {
             daemon true;
         }
-    }
-
-    finalizedBy ':backend:appengineStop'
-
-    doLast {
-        println 'Stop backend.'
-        println 'Tests complete.'
+        tasks.appengineStop.mustRunAfter(tasks.test.mustRunAfter(tasks.appengineRun))
     }
 }
