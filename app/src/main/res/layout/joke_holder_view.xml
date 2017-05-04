@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight">
 
     <TextView
         android:id="@+id/joke_holder_punchline"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:gravity="left|center_vertical"
+        android:paddingStart="24dp"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        tools:text="Test" />
 </FrameLayout>

@@ -27,5 +27,5 @@ task testWithBackend(dependsOn: 'backend:appengineRun') {
     project(':backend').afterEvaluate { backend ->
         backend.extensions.appengine.daemon = true;
     }
-    finalizedBy(tasks.getByPath('app:test').finalizedBy(tasks.getByPath('backend:appengineStop')));
+    finalizedBy(tasks.getByPath('app:connectedAndroidTest').finalizedBy(tasks.getByPath('backend:appengineStop')));
 }
