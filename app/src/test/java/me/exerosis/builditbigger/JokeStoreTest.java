@@ -29,7 +29,6 @@ public class JokeStoreTest {
                 addConverterFactory(GsonConverterFactory.create()).
                 addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
                 baseUrl("http://localhost:8080/").build().create(JokeStore.class);
-
         Joke joke = jokeStore.getJoke().toBlocking().first();
         assertNotNull(joke);
         assertNotNull(joke.getSetup());

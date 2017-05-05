@@ -17,6 +17,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class JokeListAdapter extends RecyclerView.Adapter<JokeHolderView> implements EndlessRecyclerView.Pager, Listenable<JokeListAdapterListener> {
     public static final int INITIAL_COUNT = 5;
@@ -31,9 +32,9 @@ public class JokeListAdapter extends RecyclerView.Adapter<JokeHolderView> implem
 
     private JokeListAdapter() {
         jokeStore = new Retrofit.Builder().
-                addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
                 addConverterFactory(GsonConverterFactory.create()).
-                baseUrl("http://192.168.1.4:8080/_ah/api/").build().create(JokeStore.class);
+                addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
+                baseUrl("http://192.168.1.4:8080/").build().create(JokeStore.class);
 
         for (int i = 0; i < INITIAL_COUNT; i++)
             loadNextPage();
@@ -62,9 +63,11 @@ public class JokeListAdapter extends RecyclerView.Adapter<JokeHolderView> implem
 
     @Override
     public void loadNextPage() {
-        jokeStore.getJoke().subscribe(new Action1<Joke>() {
+        jokeStore.getJoke().subscribeOn(Schedulers.io()).observeOn(AndroidSCh).subscribe(new Action1<Joke>() {
             @Override
             public void call(Joke joke) {
+//                if (listener != null)
+//                    listener.onLoading();
                 jokes.add(joke);
                 if (listener != null)
                     listener.onLoaded();

@@ -35,6 +35,11 @@ public class JokeListFragment extends Fragment implements JokeListController {
     }
 
     @Override
+    public void onLoading() {
+        view.setRefreshing(true);
+    }
+
+    @Override
     public void onLoaded() {
         view.setRefreshing(false);
     }
