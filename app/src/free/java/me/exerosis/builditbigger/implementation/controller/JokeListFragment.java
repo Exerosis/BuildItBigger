@@ -12,13 +12,25 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
+import com.rockerhieu.rvadapter.endless.EndlessRecyclerViewAdapter;
+
+import java.util.Collection;
 
 import me.exerosis.builditbigger.R;
 import me.exerosis.builditbigger.implementation.controller.adapters.JokeListAdapter;
 import me.exerosis.builditbigger.implementation.controller.container.PunchlineContainerActivity;
 import me.exerosis.builditbigger.implementation.model.Joke;
+import me.exerosis.builditbigger.implementation.model.JokeStore;
 import me.exerosis.builditbigger.implementation.view.JokeListView;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
+import static com.rockerhieu.rvadapter.endless.EndlessRecyclerViewAdapter.RequestToLoadMoreListener;
 import static me.exerosis.builditbigger.implementation.controller.PunchlineFragment.ARGS_PUNCHLINE;
 
 public class JokeListFragment extends Fragment implements JokeListController {
@@ -28,14 +40,42 @@ public class JokeListFragment extends Fragment implements JokeListController {
     private PublisherInterstitialAd interstitialAd;
     private Joke joke;
     private PublisherAdRequest addRequest;
+    private Observable<Collection<Joke>> jokesObservable;
+    private EndlessRecyclerViewAdapter adapter;
 
     @Override
     public void onCreate(Bundle in) {
         MobileAds.initialize(getActivity().getApplicationContext(), APP_ID);
+
         addRequest = new PublisherAdRequest.Builder().
                 addTestDevice("FE9CEF644E44E6BF4F25050E1FC879CA").
                 addTestDevice("1C8A071B6475F00F551B771377493E4C").
                 setRequestAgent("android_studio:ad_template").build();
+
+        jokesObservable = new Retrofit.Builder().
+                addConverterFactory(GsonConverterFactory.create()).
+                addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
+                baseUrl("http://192.168.1.4:8080/").build().create(JokeStore.class).
+                getJokes(LOAD_QUANTITY).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+
+        adapter = new EndlessRecyclerViewAdapter(getContext(), JokeListAdapter.getInstance(this), new RequestToLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                jokesObservable.subscribe(new Action1<Collection<Joke>>() {
+                    @Override
+                    public void call(Collection<Joke> jokes) {
+                        ((JokeListAdapter) adapter.getWrappedAdapter()).append(jokes);
+                        adapter.onDataReady(true);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Toast.makeText(getContext(), R.string.error_loading_joke, Toast.LENGTH_SHORT).show();
+                        adapter.onDataReady(false);
+                    }
+                });
+            }
+        });
 
         interstitialAd = new PublisherInterstitialAd(getContext());
         interstitialAd.setAdUnitId(PUNCHLINE_INTERSTITIAL);
@@ -64,22 +104,8 @@ public class JokeListFragment extends Fragment implements JokeListController {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = new JokeListView(inflater, container);
         view.loadAd(addRequest);
-
-        JokeListAdapter adapter = JokeListAdapter.getInstance();
-        adapter.setListener(this);
         view.setAdapter(adapter);
-
         return view.getRoot();
-    }
-
-    @Override
-    public void onLoaded() {
-        view.setRefreshing(false);
-    }
-
-    @Override
-    public void onError() {
-        Toast.makeText(getContext(), R.string.error_loading_joke, Toast.LENGTH_SHORT).show();
     }
 
     @Override

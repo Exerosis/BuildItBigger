@@ -1,6 +1,7 @@
 package me.exerosis.builditbigger.implementation.controller;
 
-import me.exerosis.builditbigger.implementation.controller.adapters.JokeListAdapterListener;
+import me.exerosis.builditbigger.implementation.controller.holder.JokeHolderListener;
 
-public interface JokeListController extends JokeListAdapterListener {
+public interface JokeListController extends JokeHolderListener {
+    int LOAD_QUANTITY = 20;
 }
