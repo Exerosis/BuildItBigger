@@ -16,8 +16,8 @@ import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import me.exerosis.builditbigger.R;
 import me.exerosis.builditbigger.implementation.controller.adapters.JokeListAdapter;
 import me.exerosis.builditbigger.implementation.controller.container.PunchlineContainerActivity;
+import me.exerosis.builditbigger.implementation.model.Joke;
 import me.exerosis.builditbigger.implementation.view.JokeListView;
-import me.exerosis.builditbigger.implementation.Joke;
 
 import static me.exerosis.builditbigger.implementation.controller.PunchlineFragment.ARGS_PUNCHLINE;
 
