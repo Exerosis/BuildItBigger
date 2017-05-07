@@ -47,10 +47,7 @@ public class JokeListFragment extends Fragment implements JokeListController {
     public void onCreate(Bundle in) {
         MobileAds.initialize(getActivity().getApplicationContext(), APP_ID);
 
-        addRequest = new PublisherAdRequest.Builder().
-                addTestDevice("FE9CEF644E44E6BF4F25050E1FC879CA").
-                addTestDevice("1C8A071B6475F00F551B771377493E4C").
-                setRequestAgent("android_studio:ad_template").build();
+        addRequest = new PublisherAdRequest.Builder().setRequestAgent("android_studio:ad_template").build();
 
         jokesObservable = new Retrofit.Builder().
                 addConverterFactory(GsonConverterFactory.create()).
@@ -75,7 +72,7 @@ public class JokeListFragment extends Fragment implements JokeListController {
                     }
                 });
             }
-        });
+        }, R.layout.joke_list_progress_view, true);
 
         interstitialAd = new PublisherInterstitialAd(getContext());
         interstitialAd.setAdUnitId(PUNCHLINE_INTERSTITIAL);
@@ -101,6 +98,12 @@ public class JokeListFragment extends Fragment implements JokeListController {
     }
 
     @Override
+    public void onDestroy() {
+        startPunchlineActivity();
+        super.onDestroy();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = new JokeListView(inflater, container);
         view.loadAd(addRequest);
@@ -119,8 +122,11 @@ public class JokeListFragment extends Fragment implements JokeListController {
     }
 
     private void startPunchlineActivity() {
-        if (this.joke != null)
+        if (!interstitialAd.isLoading() && !interstitialAd.isLoaded())
+            interstitialAd.loadAd(addRequest);
+        if (this.joke != null && getContext() != null)
             getContext().startActivity(new Intent(getContext(), PunchlineContainerActivity.class).
                     putExtra(ARGS_PUNCHLINE, joke.getPunchline()));
+        joke = null;
     }
 }

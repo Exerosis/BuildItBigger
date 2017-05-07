@@ -17,7 +17,6 @@ public final class JokeFactory implements JokeStore {
     static {
         JOKES.add(new Joke("Why did the Hedgehog cross the road?", "To see his Flat Mate."));
         JOKES.add(new Joke("What do you call a Fish without an eye?", "A 'Fsh'!"));
-        JOKES.add(new Joke("Why does it take 1 million sperm to fertilize one egg?", "They won't stop to ask directions."));
         JOKES.add(new Joke("What's the difference between Big Foot and an intelligent man?", "Big Foot's been spotted several times."));
         JOKES.add(new Joke("What do you call a handcuffed man?", "Trustworthy."));
         JOKES.add(new Joke("What did the fish say when he hit a concrete wall?", "'Dam'."));
@@ -46,7 +45,6 @@ public final class JokeFactory implements JokeStore {
         JOKES.add(new Joke("What did the big chimney say to the little chimney?", "'You are too young to smoke.'"));
         JOKES.add(new Joke("What did the fish say to the seashores?", "'Can I ride on you seashorse?'"));
         JOKES.add(new Joke("Why did Cinderella get kicked off the baseball team?", "Because she ran away from the ball."));
-        JOKES.add(new Joke("A man went to play golf for the day. He took his golf clubs and two pairs of pants. What were the extra pants for?", "In case he got a hole-in-one."));
         JOKES.add(new Joke("Why didn't the skeleton cross the road?", "Because it had no guts."));
         JOKES.add(new Joke("I have 3 heads, 5 legs, 7 arms and 444 fingers. What am I?", "A liar."));
         JOKES.add(new Joke("What do you get when you cross an elephant with a kangaroo?", "Holes all over Australia."));
