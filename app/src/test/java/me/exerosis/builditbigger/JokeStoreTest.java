@@ -2,6 +2,8 @@ package me.exerosis.builditbigger;
 
 import org.junit.Test;
 
+import java.util.Collection;
+
 import me.exerosis.builditbigger.jokes.Joke;
 import me.exerosis.builditbigger.jokes.JokeFactory;
 import me.exerosis.builditbigger.jokes.JokeStore;
@@ -11,16 +13,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class JokeStoreTest {
     @Test
     public void factoryReturnsJoke() throws Exception {
-        Joke joke = JokeFactory.getInstance().getJoke().toBlocking().first();
-        assertNotNull(joke);
-        assertNotNull(joke.getSetup());
-        assertNotNull(joke.getPunchline());
-        assertFalse(joke.getSetup().isEmpty());
-        assertFalse(joke.getPunchline().isEmpty());
+        Collection<Joke> jokes = JokeFactory.getInstance().getJokes(3).toBlocking().first();
+        assertNotNull(jokes);
+        assertTrue(jokes.size() == 3);
+        for (Joke joke : jokes) {
+            assertNotNull(joke.getSetup());
+            assertNotNull(joke.getPunchline());
+            assertFalse(joke.getSetup().isEmpty());
+            assertFalse(joke.getPunchline().isEmpty());
+        }
     }
 
     @Test
@@ -29,11 +35,15 @@ public class JokeStoreTest {
                 addConverterFactory(GsonConverterFactory.create()).
                 addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
                 baseUrl("http://localhost:8080/").build().create(JokeStore.class);
-        Joke joke = jokeStore.getJoke().toBlocking().first();
-        assertNotNull(joke);
-        assertNotNull(joke.getSetup());
-        assertNotNull(joke.getPunchline());
-        assertFalse(joke.getSetup().isEmpty());
-        assertFalse(joke.getPunchline().isEmpty());
+
+        Collection<Joke> jokes = jokeStore.getJokes(3).toBlocking().first();
+        assertNotNull(jokes);
+        assertTrue(jokes.size() == 3);
+        for (Joke joke : jokes) {
+            assertNotNull(joke.getSetup());
+            assertNotNull(joke.getPunchline());
+            assertFalse(joke.getSetup().isEmpty());
+            assertFalse(joke.getPunchline().isEmpty());
+        }
     }
 }

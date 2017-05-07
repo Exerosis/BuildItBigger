@@ -1,9 +1,11 @@
 package me.exerosis.builditbigger.jokes;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import retrofit2.http.Query;
 import rx.Observable;
 
 public final class JokeFactory implements JokeStore {
@@ -72,13 +74,17 @@ public final class JokeFactory implements JokeStore {
     }
 
     @Override
-    public Observable<Joke> getJoke() {
+    public Observable<Collection<Joke>> getJokes(@Query("count") int count) {
         if (SHOWN.size() >= JOKES.size())
             SHOWN.clear();
-        Joke joke = null;
-        while (joke == null || SHOWN.contains(joke))
-            joke = JOKES.get(RANDOM.nextInt(JOKES.size() - 1));
-        SHOWN.add(joke);
-        return Observable.just(joke);
+        Collection<Joke> jokes = new ArrayList<>(count);
+        for (int i = 0; i < count; i++) {
+            Joke joke = null;
+            while (joke == null || SHOWN.contains(joke))
+                joke = JOKES.get(RANDOM.nextInt(JOKES.size() - 1));
+            SHOWN.add(joke);
+            jokes.add(joke);
+        }
+        return Observable.just(jokes);
     }
 }

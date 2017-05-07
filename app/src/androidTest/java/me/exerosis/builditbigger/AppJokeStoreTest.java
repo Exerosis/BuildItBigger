@@ -7,6 +7,8 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Collection;
+
 import me.exerosis.builditbigger.jokes.Joke;
 import me.exerosis.builditbigger.jokes.JokeStore;
 import retrofit2.Retrofit;
@@ -24,11 +26,14 @@ public class AppJokeStoreTest {
                 addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
                 baseUrl("http://192.168.1.4:8080/").build().create(JokeStore.class);
 
-        Joke joke = jokeStore.getJoke().toBlocking().first();
-        assertNotNull(joke);
-        assertNotNull(joke.getSetup());
-        assertNotNull(joke.getPunchline());
-        assertFalse(joke.getSetup().isEmpty());
-        assertFalse(joke.getPunchline().isEmpty());
+        Collection<Joke> jokes = jokeStore.getJokes(3).toBlocking().first();
+        assertNotNull(jokes);
+        assertTrue(jokes.size() == 3);
+        for (Joke joke : jokes) {
+            assertNotNull(joke.getSetup());
+            assertNotNull(joke.getPunchline());
+            assertFalse(joke.getSetup().isEmpty());
+            assertFalse(joke.getPunchline().isEmpty());
+        }
     }
 }
