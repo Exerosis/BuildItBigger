@@ -1,7 +1,5 @@
 package me.exerosis.builditbigger;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
@@ -9,8 +7,8 @@ import org.junit.runner.RunWith;
 
 import java.util.Collection;
 
-import me.exerosis.builditbigger.jokes.Joke;
-import me.exerosis.builditbigger.jokes.JokeStore;
+import me.exerosis.builditbigger.implementation.model.Joke;
+import me.exerosis.builditbigger.implementation.model.JokeStore;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

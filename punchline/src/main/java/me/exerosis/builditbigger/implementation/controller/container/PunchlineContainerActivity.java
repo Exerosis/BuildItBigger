@@ -1,12 +1,11 @@
-package me.exerosis.builditbigger.implementation.controller;
+package me.exerosis.builditbigger.implementation.controller.container;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import me.exerosis.builditbigger.implementation.controller.container.PunchlineContainerController;
+import me.exerosis.builditbigger.implementation.controller.PunchlineFragment;
 import me.exerosis.builditbigger.implementation.view.container.PunchlineContainer;
 import me.exerosis.builditbigger.implementation.view.container.PunchlineContainerView;
-import me.exerosis.builditbigger.mvc.Container;
 
 public class PunchlineContainerActivity extends AppCompatActivity implements PunchlineContainerController {
     private static final String TAG_PUNCHLINE_FRAGMENT = "PUNCHLINE_FRAGMENT";

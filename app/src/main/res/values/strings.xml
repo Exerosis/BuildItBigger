@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BuildItBigger</string>
     <string name="joke_list_banner">ca-app-pub-5347337988962999/6434510063</string>
+    <string name="error_loading_joke">Problem Loading Jokes</string>
 </resources>

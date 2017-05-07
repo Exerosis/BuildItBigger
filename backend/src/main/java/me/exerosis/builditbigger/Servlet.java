@@ -1,6 +1,7 @@
 package me.exerosis.builditbigger;
 
-import com.google.appengine.repackaged.com.google.gson.Gson;
+
+import com.google.gson.Gson;
 
 import java.io.IOException;
 
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import me.exerosis.builditbigger.jokes.JokeFactory;
+import me.exerosis.builditbigger.implementation.model.JokeFactory;
 
 public class Servlet extends HttpServlet {
     private final Gson gson = new Gson();
@@ -17,6 +18,11 @@ public class Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getServletPath().equals("/getJokes")) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             String json = gson.toJson(JokeFactory.getInstance().getJokes(Integer.parseInt(request.getParameter("count"))).toBlocking().first());
             response.setContentType("json");
             response.setCharacterEncoding("UTF-8");

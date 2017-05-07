@@ -6,11 +6,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.github.yasevich.endlessrecyclerview.EndlessRecyclerView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherAdView;
 
 import me.exerosis.builditbigger.R;
 import me.exerosis.builditbigger.implementation.controller.JokeList;
@@ -18,19 +21,19 @@ import me.exerosis.builditbigger.implementation.controller.adapters.JokeListAdap
 
 public class JokeListView implements JokeList {
     private final View view;
-    private final AdView bannerAd;
+    private final PublisherAdView bannerAd;
     private final EndlessRecyclerView jokesList;
 
     public JokeListView(LayoutInflater inflater, ViewGroup container) {
         view = inflater.inflate(R.layout.jokes_list_view, container, false);
-        bannerAd = (AdView) view.findViewById(R.id.joke_list_banner_ad);
+        bannerAd = (PublisherAdView) view.findViewById(R.id.joke_list_banner_ad);
         jokesList = (EndlessRecyclerView) view.findViewById(R.id.joke_list);
 
         jokesList.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        jokesList.setProgressView(new ProgressBar(view.getContext()));
+        jokesList.setProgressView(R.layout.joke_list_progress_view);
     }
 
-    public void loadAd(AdRequest request) {
+    public void loadAd(PublisherAdRequest request) {
         bannerAd.loadAd(request);
     }
 

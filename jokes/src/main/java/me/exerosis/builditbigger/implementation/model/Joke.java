@@ -1,4 +1,4 @@
-package me.exerosis.builditbigger.jokes;
+package me.exerosis.builditbigger.implementation.model;
 
 public class Joke {
     private final String setup;

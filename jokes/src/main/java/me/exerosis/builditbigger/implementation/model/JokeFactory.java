@@ -1,4 +1,4 @@
-package me.exerosis.builditbigger.jokes;
+package me.exerosis.builditbigger.implementation.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -75,13 +75,13 @@ public final class JokeFactory implements JokeStore {
 
     @Override
     public Observable<Collection<Joke>> getJokes(@Query("count") int count) {
-        if (SHOWN.size() >= JOKES.size())
-            SHOWN.clear();
         Collection<Joke> jokes = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
+            if (SHOWN.size() >= JOKES.size())
+                SHOWN.clear();
             Joke joke = null;
             while (joke == null || SHOWN.contains(joke))
-                joke = JOKES.get(RANDOM.nextInt(JOKES.size() - 1));
+                joke = JOKES.get(RANDOM.nextInt(JOKES.size()));
             SHOWN.add(joke);
             jokes.add(joke);
         }

@@ -1,7 +1,5 @@
 package me.exerosis.builditbigger.implementation.controller.holder;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,30 +8,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import me.exerosis.builditbigger.R;
-import me.exerosis.builditbigger.implementation.controller.PunchlineContainerActivity;
-import me.exerosis.builditbigger.jokes.Joke;
-
-import static me.exerosis.builditbigger.implementation.controller.PunchlineFragment.ARGS_PUNCHLINE;
+import me.exerosis.builditbigger.implementation.model.Joke;
 
 public class JokeHolderView extends RecyclerView.ViewHolder implements JokeHolder {
     private final TextView punchline;
     private Joke joke;
+    private JokeHolderListener listener;
 
     public JokeHolderView(LayoutInflater inflater, ViewGroup container) {
         super(inflater.inflate(R.layout.joke_holder_view, container, false));
-
-        punchline = (TextView) itemView.findViewById(R.id.joke_holder_punchline);
-
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (joke == null)
-                    return;
-                Context context = getRoot().getContext();
-                context.startActivity(new Intent(context, PunchlineContainerActivity.class).
-                        putExtra(ARGS_PUNCHLINE, joke.getPunchline()));
+                if (joke != null || listener != null)
+                    listener.onClick(joke);
             }
         });
+        punchline = (TextView) itemView.findViewById(R.id.joke_holder_punchline);
     }
 
     @Override
@@ -50,5 +41,15 @@ public class JokeHolderView extends RecyclerView.ViewHolder implements JokeHolde
     public void setJoke(Joke joke) {
         this.joke = joke;
         punchline.setText(joke.getSetup());
+    }
+
+    @Override
+    public JokeHolderListener getListener() {
+        return listener;
+    }
+
+    @Override
+    public void setListener(JokeHolderListener listener) {
+        this.listener = listener;
     }
 }
