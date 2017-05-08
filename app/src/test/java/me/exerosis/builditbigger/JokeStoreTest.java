@@ -34,7 +34,7 @@ public class JokeStoreTest {
         JokeStore jokeStore = new Retrofit.Builder().
                 addConverterFactory(GsonConverterFactory.create()).
                 addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync()).
-                baseUrl("http://192.168.1.4:8080/").build().create(JokeStore.class);
+                baseUrl("http://localhost:8080/").build().create(JokeStore.class);
 
         Collection<Joke> jokes = jokeStore.getJokes(3).toBlocking().first();
         assertNotNull(jokes);
